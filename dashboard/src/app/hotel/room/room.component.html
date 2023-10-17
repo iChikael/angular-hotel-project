@@ -1,0 +1,65 @@
+<mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <ng-container *ngFor="let tab of tabs; let i = index">
+      <mat-tab [label]="tab.label">
+        <ng-template matTabContent>
+          <div class="room-container">
+            <ng-container *ngFor="let room of rooms">
+              <ng-container *ngIf="room.name.charAt(1) === (i + 1).toString()">
+                <mat-card class="example-card" [ngClass]="{
+                  'free-room': room.status === 'FREE',
+                  'clean-room': room.status === 'CLEANING',
+                  'serve-room': room.status === 'SERVE'
+                }">
+                  <mat-card-header>
+                    <mat-card-title>{{ room.name }} - {{ room.status}}</mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>{{  room.description }}</mat-card-content>
+                  <mat-card-actions align="end" (click)="drawer.toggle()">
+                    <button mat-button>MORE</button>
+                  </mat-card-actions>
+                </mat-card>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </ng-container>
+</mat-tab-group>
+
+
+<mat-drawer #drawer class="example-sidenav" mode="push" position="end">
+  <form class="form-container100 popup" (ngSubmit)="onConfirm(f)" #f="ngForm">
+    <mat-form-field>
+      <mat-select name="name" placeholder="Phòng" [ngModel]="name">
+        <mat-option *ngFor="let room of rooms" [value]="room.name">
+          {{ room.name }} - {{ room.giasp }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>  
+  <mat-form-field>
+    <input matInput name="name" placeholder="Tên khách hàng" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Chọn ngày thuê</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input matStartDate formControlName="start" placeholder="Start date">
+      <input matEndDate formControlName="end" placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
+  
+    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Ghi chú khách hàng</mat-label>
+    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    <!-- <textarea matInput [placeholder] = "room.description"></textarea> -->
+  </mat-form-field>
+</form>
+  <button type="button" mat-button (click)="drawer.toggle()">
+    Trở về
+  </button>
+</mat-drawer>
+

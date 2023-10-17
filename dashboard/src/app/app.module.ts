@@ -20,8 +20,8 @@ import { MaterialModule } from './base/material.module';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './hotel/dashboard/dashboard.module';
 import { SpinnerComponent } from './shared/spinner.component';
-import { FormReservationModule } from './hotel/form-reservation/form-reservation.module';
 import { PageSchedulerModule } from './hotel/page-scheduler/page-scheduler.module';
+import { RoomModule } from './hotel/room/room.module';
 
 
 @NgModule({
@@ -47,8 +47,8 @@ import { PageSchedulerModule } from './hotel/page-scheduler/page-scheduler.modul
     MaterialModule,
     SharedModule,
     DashboardModule,
-    FormReservationModule,
-    PageSchedulerModule
+    PageSchedulerModule,
+    RoomModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
