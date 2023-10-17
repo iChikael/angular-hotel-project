@@ -1,0 +1,29 @@
+<!-- ============================================================== -->
+<!-- sidebar -->
+<!-- ============================================================== -->
+
+
+<mat-menu #sdprofile="matMenu" class="mymegamenu">
+  <button mat-menu-item>
+    <mat-icon fontIcon="settings"></mat-icon> Settings </button>
+  <button mat-menu-item>
+    <mat-icon fontIcon="account_box"></mat-icon> Profile </button>
+  <button mat-menu-item>
+    <mat-icon fontIcon="notifications_off"></mat-icon> Disable notifications </button>
+  <button mat-menu-item>
+    <mat-icon fontIcon="exit_to_app"></mat-icon> Sign Out </button>
+</mat-menu>
+
+<mat-nav-list appAccordion>
+  <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected">
+    <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+      <mat-icon>{{ menuitem.icon }}</mat-icon>
+      <span>{{ menuitem.name }}</span>
+      <span fxFlex></span>
+
+    </a>
+
+
+  </mat-list-item>
+
+</mat-nav-list>
